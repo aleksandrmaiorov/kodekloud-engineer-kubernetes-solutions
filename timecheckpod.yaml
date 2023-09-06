@@ -11,6 +11,8 @@
 
 # Note: The kubectl utility on jump_host has been configured to work with the kubernetes cluster.
 
+# create the following manifest file using: 
+## vi 1.yaml
 
 apiVersion: v1
 kind: Namespace
@@ -49,3 +51,6 @@ spec:
     - name: log-volume
       emptyDir : {}
   restartPolicy: Never
+
+
+  # apply this manifest using kubectl apply -f 1.yaml
