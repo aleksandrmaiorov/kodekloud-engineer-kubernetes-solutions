@@ -1,3 +1,9 @@
+### In this scenario, you are asked to create a job that would run for 5 seconds and later killed. 
+### They provide you with image you have to use. Please pay attention to command. If it is busybox you can use /bin/sh, but centos/redhat/debian/ubuntu will require you to use /bin/bash
+
+## to create a file you the following command
+## vi 1.yaml
+
 apiVersion: batch/v1
 kind: Job
 metadata:
@@ -15,3 +21,11 @@ spec:
          - "-c"
          - "sleep 5"
       restartPolicy: Never
+
+## to save file please use :wq
+
+## in order to apply this yaml file, please run the following command : 
+## kubectl apply -f 1.yaml 
+
+## enjoy your time .....
+
