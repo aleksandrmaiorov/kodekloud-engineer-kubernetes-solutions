@@ -1,0 +1,34 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  annotations:
+  labels:
+    app: web-app
+  name: webserver
+  namespace: default
+spec:
+  containers:
+  - image: httpd:latest
+    imagePullPolicy: IfNotPresent
+    name: httpd-container
+    resources: {}
+    terminationMessagePath: /dev/termination-log
+    terminationMessagePolicy: File
+    volumeMounts:
+    - mountPath: /var/log/httpd
+      name: shared-logs
+  - command:
+    - sh
+    - -c
+    - while true; do cat /var/log/httpd/access.log /var/log/httpd/error.log; sleep
+      30; done
+    image: ubuntu:latest
+    imagePullPolicy: Always
+    name: sidecar-container
+    resources: {}
+    volumeMounts:
+    - mountPath: /var/log/httpd
+      name: shared-logs
+  volumes:
+  - emptyDir: {}
+    name: shared-logs
